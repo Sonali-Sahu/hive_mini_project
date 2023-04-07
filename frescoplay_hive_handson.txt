@@ -1,0 +1,38 @@
+# Hands-on 1 Creating Tables
+1. create a db named hive_tables
+Ans.
+create database hive_tables;
+
+use hive_tables;
+
+2. Under hive_tables db,create a managed table named bank_internal.
+get column names for the table from the csv file. Make sure to skip the header while 
+loading the data into a table
+Ans.
+create table bank_internal(age int,job string,marital string,balance int,
+loan string,contact string,month string,duration int) row format delimited
+fields terminated by "," tblproperties("skip.header.line.count"="1");
+
+3. load the csv data into bank internal table
+
+Ans.  load data local inpath "file:///projects/challenge/bank.csv" into table bank_internal;
+
+4. Create directory names /bank_external in HDFS.
+Ans.
+      hdfs dfs -mkdir -p /bank_external
+to check :- hadoop fs -ls /
+
+5. Create an external table named bank_external and set the location as /bank_external. get the 
+columns for the table from the csv file. make sure to skip the header while loading the data into a table.
+Ans.
+create external table bank_external(age int,job string,marital string,balance int,
+loan string,contact string,month string,duration int) row format delimited
+fields terminated by "," location '/bank_external/' tblproperties("skip.header.line.count"="1");
+
+
+6. Copy the bank.csv file to bank_external hdfs directory
+Ans.
+hadoop fs -put bank.csv /bank_external
+
+To check :-  hadoop fs -ls /bank_external
+
