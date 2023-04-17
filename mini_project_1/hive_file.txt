@@ -8,8 +8,27 @@ Note: both files are csv files.
 
 
 1. Create a schema based on the given dataset
+Ans. 
+hive> create table AgentLogingReport(slno int,agent string,agent_date date,login_time timestamp,logout_time timestamp,duration timestamp) row format delimited fields terminated by ",";
+OK
+Time taken: 0.751 seconds
+hive> create table AgentPerformance(slno int,agent_date date,agent_name string,total_chats int,average_reponse_time timestamp,average_resolution_time timestamp,average_rating float,total_feedback int) row format delimited fields terminated by ",";
+OK
+Time taken: 0.123 seconds
+
 2. Dump the data inside the hdfs in the given schema location.
+Ans. 
+abc@f5ebd325ec7f:~/workspace$ hadoop fs -put AgentLogingReport.csv /tmp
+abc@f5ebd325ec7f:~/workspace$ hadoop fs -put AgentPerformance.csv /tmp
+
+abc@f5ebd325ec7f:~/workspace$ hadoop fs -ls /tmp
+Found 3 items
+-rw-r--r--   1 abc  supergroup      55351 2023-04-17 11:33 /tmp/AgentLogingReport.csv
+-rw-r--r--   1 abc  supergroup     109853 2023-04-17 11:33 /tmp/AgentPerformance.csv
+drwx-wx-wx   - root supergroup          0 2023-04-17 11:30 /tmp/hive
+
 3. List of all agents' names. 
+Ans. 
 4. Find out agent average rating.
 5. Total working days for each agents 
 6. Total query that each agent have taken 
