@@ -33,6 +33,60 @@ hive> load data  inpath "/tmp/AgentPerformance.csv" into table AgentPerformance;
 
 3. List of all agents' names. 
 Ans. 
+select distinct(agent) from AgentLogingReport ;
+
+output:- 
+          Aditya Shinde
+          Aditya_iot
+          Agent
+          Amersh
+          Ameya Jain
+          Ankitjha
+          Anurag Tiwari
+          Aravind
+          Ayushi Mishra
+          Bharath
+          Boktiar Ahmed Bappy
+          Chaitra K Hiremath
+          Deepranjan Gupta
+          Dibyanshu
+          Harikrishnan Shaji
+          Hrisikesh Neogi
+          Hyder Abbas
+          Ineuron Intelligence
+          Ishawant Kumar
+          Jawala Prakash
+          Jaydeep Dixit
+          Khushboo Priya
+          Madhulika G
+          Mahesh Sarade
+          Maitry
+          Manjunatha A
+          Mithun S
+          Mukesh
+          Muskan Garg
+          Nandani Gupta
+          Nishtha Jain
+          Nitin M
+          Prabir Kumar Satapathy
+          Prateek _iot
+          Prerna Singh
+          Rishav Dash
+          Saikumarreddy N
+          Sanjeev Kumar
+          Saurabh Shukla
+          Shiva Srivastava
+          Shivan K
+          Shivananda Sonwane
+          Shubham Sharma
+          Sowmiya Sivakumar
+          Sudhanshu Kumar
+          Suraj S Bilgi
+          Swati
+          Tarun
+          Wasim
+          Zeeshan
+          Time taken: 24.703 seconds, Fetched: 50 row(s)
 4. Find out agent average rating.
 5. Total working days for each agents 
 6. Total query that each agent have taken 
