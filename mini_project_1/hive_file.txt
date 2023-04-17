@@ -218,6 +218,9 @@ Output:-
           Zeeshan 10
           Time taken: 24.739 seconds, Fetched: 49 row(s)
 6. Total query that each agent have taken 
+Ans select sum(total_chats) from AgentPerformance group by agent_name;
+output :- 
+          
 7. Total Feedback that each agent have received 
 8. Agent name who have average rating between 3.5 to 4 
 9. Agent name who have rating less than 3.5 
