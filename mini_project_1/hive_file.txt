@@ -9,10 +9,12 @@ Note: both files are csv files.
 
 1. Create a schema based on the given dataset
 Ans. 
-hive> create table AgentLogingReport(slno int,agent string,agent_date date,login_time timestamp,logout_time timestamp,duration timestamp) row format delimited fields terminated by ",";
+hive> create table AgentLogingReport(slno int,agent string,agent_date string,login_time string,
+logout_time string,duration string) row format delimited fields terminated by "," tblproperties("skip.header.line.count"="1");
 OK
 Time taken: 0.751 seconds
-hive> create table AgentPerformance(slno int,agent_date date,agent_name string,total_chats int,average_reponse_time timestamp,average_resolution_time timestamp,average_rating float,total_feedback int) row format delimited fields terminated by ",";
+hive> create table AgentPerformance(slno int,agent_date string,agent_name string,total_chats int,average_reponse_time
+string,average_resolution_time string,average_rating float,total_feedback int) row format delimited fields terminated by "," tblproperties("skip.header.line.count"="1");
 OK
 Time taken: 0.123 seconds
 
@@ -222,13 +224,35 @@ Ans select sum(total_chats) from AgentPerformance group by agent_name;
 output :- 
           
 7. Total Feedback that each agent have received 
+Ans.  select sum(total_feedback) from AgentPerformance group by agent_name;
+
 8. Agent name who have average rating between 3.5 to 4 
+Ans.  select agent_name,avg(average_rating) from AgentPerformance group by agent_name having avg(average_rating) between 3.5 AND 4;
+
 9. Agent name who have rating less than 3.5 
+Ans. select agent_name,avg(average_rating) from AgentPerformance group by agent_name having avg(average_rating) < 3.5;
+
 10. Agent name who have rating more than 4.5 
+Ans. select agent_name,avg(average_rating) from AgentPerformance group by agent_name having avg(average_rating) > 4.5;
+
 11. How many feedback agents have received more than 4.5 average
+Ans.  select count(agent_name) from AgentPerformance group by agent_name having avg(avergae_rating) >4.5;
+
 12. average weekly response time for each agent 
+Ans. select avg(cast(average_response_time as timestamp)) from AgentPerformance group by agent_name;
+
 13. average weekly resolution time for each agents 
+Ans. select avg(cast(average_resolution_time as timestamp)) from AgentPerformance group by agent_name;
+
 14. Find the number of chat on which they have received a feedback 
+Ans. select sum(total_chats) from AgentPerformance where total_feedback <> 0 and group by agent_name;
+
 15. Total contribution hour for each and every agents weekly basis 
+Ans. 
+
 16. Perform inner join, left join and right join based on the agent column and after joining the table export that data into your local system.
+Ans.
+
 17. Perform partitioning on top of the agent column and then on top of that perform bucketing for each partitioning.
+Ans. 
+
