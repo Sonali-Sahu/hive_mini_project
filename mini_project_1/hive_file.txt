@@ -165,6 +165,58 @@ output:-
           Time taken: 24.281 seconds, Fetched: 71 row(s)
 5. Total working days for each agents 
 Ans.
+select agent, count(agent_date) as total_days from AgentLogingReport group by agent;
+Output:- 
+          Aditya Shinde   1
+          Aditya_iot      9
+          Amersh  4
+          Ameya Jain      10
+          Ankitjha        4
+          Anurag Tiwari   37
+          Aravind 10
+          Ayushi Mishra   18
+          Bharath 9
+          Boktiar Ahmed Bappy     17
+          Chaitra K Hiremath      13
+          Deepranjan Gupta        58
+          Dibyanshu       208
+          Harikrishnan Shaji      23
+          Hrisikesh Neogi 37
+          Hyder Abbas     2
+          Ineuron Intelligence    1
+          Ishawant Kumar  49
+          Jawala Prakash  16
+          Jaydeep Dixit   11
+          Khushboo Priya  18
+          Madhulika G     17
+          Mahesh Sarade   36
+          Maitry  5
+          Manjunatha A    8
+          Mithun S        14
+          Mukesh  3
+          Muskan Garg     12
+          Nandani Gupta   11
+          Nishtha Jain    18
+          Nitin M 1
+          Prabir Kumar Satapathy  26
+          Prateek _iot    17
+          Prerna Singh    18
+          Rishav Dash     12
+          Saikumarreddy N 10
+          Sanjeev Kumar   20
+          Saurabh Shukla  40
+          Shiva Srivastava        15
+          Shivan K        36
+          Shivananda Sonwane      15
+          Shubham Sharma  35
+          Sowmiya Sivakumar       24
+          Sudhanshu Kumar 11
+          Suraj S Bilgi   5
+          Swati   5
+          Tarun   1
+          Wasim   20
+          Zeeshan 10
+          Time taken: 24.739 seconds, Fetched: 49 row(s)
 6. Total query that each agent have taken 
 7. Total Feedback that each agent have received 
 8. Agent name who have average rating between 3.5 to 4 
