@@ -14,6 +14,18 @@ Download Dataset - https://data.cityofnewyork.us/browse?q=parking+tickets
 
 Note: Consider only the year 2017 for analysis and not the Fiscal year.
 
+Add data in docker desktop using docker command :-
+Step1 :- cd C:\docker_folder\HiveDockerSetup
+Step2 :- docker cp PVI_2017.csv <name-node container_id>:PVI_2017.csv
+Step3 :- docker exec -it <name-node container_id> bash
+Step4 :- hdfs dfs -mkdir -p /input_data/
+Step5 :- hdfs dfs -put PVI_2017.csv /input_data/PVI_2017.csv
+Step6 :- hdfs dfs -ls /input_data
+
+output :-  -rw-r--r--   3 root supergroup 2086913576 2023-05-01 12:22 /input_data/PVI_2017.csv
+
+
+
 The analysis can be divided into two parts:
  
 Part-I: Examine the data
