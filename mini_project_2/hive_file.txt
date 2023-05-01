@@ -24,16 +24,88 @@ Step6 :- hdfs dfs -ls /input_data
 
 output :-  -rw-r--r--   3 root supergroup 2086913576 2023-05-01 12:22 /input_data/PVI_2017.csv
 
+create table :- 
+columns:- Summons Number	Plate ID	Registration State	Plate Type	Issue Date	Violation Code	Vehicle Body Type	Vehicle Make	Issuing Agency	Street Code1	Street Code2	Street Code3	Vehicle Expiration Date	Violation Location	Violation Precinct	Issuer Precinct	Issuer Code	Issuer Command	Issuer Squad	Violation Time	Time First Observed	Violation County	Violation In Front Of Or Opposite	House Number	Street Name	Intersecting Street	Date First Observed	Law Section	Sub Division	Violation Legal Code	Days Parking In Effect    	From Hours In Effect	To Hours In Effect	Vehicle Color	Unregistered Vehicle?	Vehicle Year	Meter Number	Feet From Curb	Violation Post Code	Violation Description	No Standing or Stopping Violation	Hydrant Violation	Double Parking Violation
 
 
+CREATE EXTERNAL TABLE IF NOT EXISTS pvi_2017(
+    SUMMONSNUMBER INT,
+    PLATEID CHAR(100),
+    REG_STATE CHAR(10),
+    PLATETYPE CHAR(10),
+    ISSUEDATE CHAR(15),
+    VIOLATIONCODE INT,
+    VEHBODYTYPE CHAR(20),
+    VEHMAKE CHAR(30),
+    ISSUEAGENCY CHAR(5),
+    STREETCODE1 int,
+    STREETCODE2 int,
+    STREETCODE3 int,
+    VEHEXPIREDATE CHAR(20),
+    VIOLOCATION int,
+    VIOPRECINCT int,
+    ISSUERPRECINCT int,
+    ISSUERCODE int,
+    ISSUERCOMMAND char(20),
+    ISSUERSQUAD CHAR(10),
+    VIOLATIONTIME CHAR(20),
+    TIMEFIRSTOBERSERVED CHAR(20),
+    VIOLATIONCOUNTY CHAR(10),
+    VIOLATIONIO char(5),
+    HOUSENUMBER CHAR(20),
+    STREETNAME CHAR(20),
+    INTERSECTINGSTREET char(30),
+    DATEFIRSTOBSERVED CHAR(20),
+    LAWSECTION int,
+    SUBDIVISION CHAR(5),
+    VIOLATIONLEGALCODE CHAR(5),
+    DAYSPARKINGINEFFECT CHAR(20),
+    FROMHOURSINEFFECT CHAR(20),
+    TOHOURSINEFFECT CHAR(20),
+    VEHCOLOUR CHAR(20),
+    UNREGISTEREDVEHICLE int,
+    VEHICLEYEAR int,
+    METERNUMBER CHAR(20),
+    FEETFROMCURB int,
+    VIOLATIONPOSTCODE CHAR(10),
+    VIOLATIONDESCRIPTION CHAR(100),
+    NSSV  char(5),
+    HYDRVIOL char(5),
+    DOUBLEPARKINGVIO char(5)
+   )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+location '/input_data/PVI_2017'
+tblproperties("skip.header.line.count"="1");
+
+
+above create table command works fine. 
+
+
+
+Last 3 columns doesn't have any data
+
+    NSSV ,
+    HYDRVIOL ,
+    DOUBLEPARKINGVIO 
+    
+    
+    
+    
 The analysis can be divided into two parts:
  
 Part-I: Examine the data
 
 1.) Find the total number of tickets for the year.
+Ans. select count(*) from pvi_2017;
+
 2.) Find out how many unique states the cars which got parking tickets came from.
+Ans. 
+ select distinct(REG_STATE) from pvi_2017;
 3.) Some parking tickets don’t have addresses on them, which is cause for concern. 
 Find out how many such tickets there are(i.e. tickets where either "Street Code 1" or "Street Code 2" or "Street Code 3" is empty )
+Ans. select count(*) from pvi_2017 where STREETCODE1 IS NULL or STREETCODE2 is NULL or STREETCODE3 is NULL;
 
 Part-II: Aggregation tasks
 
