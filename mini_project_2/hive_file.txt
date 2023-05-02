@@ -27,7 +27,7 @@ output :-  -rw-r--r--   3 root supergroup 2086913576 2023-05-01 12:22 /input_dat
 create table :- 
 
 
-CREATE EXTERNAL TABLE IF NOT EXISTS pvi_2017(
+CREATE TABLE IF NOT EXISTS pvi_2017(
     SUMMONSNUMBER INT,
     PLATEID CHAR(100),
     REG_STATE CHAR(10),
@@ -72,10 +72,12 @@ CREATE EXTERNAL TABLE IF NOT EXISTS pvi_2017(
     HYDRVIOL char(5),
     DOUBLEPARKINGVIO char(5)
    )
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ','
+row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+with serdeproperties (
+"separatorChar" = ",",
+"quoteChar" = "\"",
+"escapeChar" = "\\") 
 STORED AS TEXTFILE
-location '/input_data/PVI_2017'
 tblproperties("skip.header.line.count"="1");
 
 
@@ -90,7 +92,9 @@ Last 3 columns doesn't have any data
     DOUBLEPARKINGVIO 
     
     
-    
+ Data load Statement :- 
+ 
+ load data local inpath 'file:///home/cloudera/hive_data/Parking_Violations_Issued_-_Fiscal_Year_2017.csv' into table parking_violation;
     
 The analysis can be divided into two parts:
  
